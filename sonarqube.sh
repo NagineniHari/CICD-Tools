@@ -2,15 +2,15 @@
 
 #resize disk from 20GB to 50GB
 ## growpart /dev/xvda 4
-growpart /dev/nvme0n1 4
+sudo growpart /dev/nvme0n1 4
 
-lvextend -L +10G /dev/mapper/RootVG-varVol
-lvextend -L +10G /dev/mapper/RootVG-rootVol
-lvextend -l +100%FREE /dev/mapper/RootVG-homeVol
+sudo lvextend -L +10G /dev/mapper/RootVG-varVol
+sudo lvextend -L +10G /dev/mapper/RootVG-rootVol
+sudo lvextend -l +100%FREE /dev/mapper/RootVG-homeVol
 
-xfs_growfs /
-xfs_growfs /var
-xfs_growfs /home
+sudo xfs_growfs /
+sudo xfs_growfs /var
+sudo xfs_growfs /home
 
 # docker
 yum install -y yum-utils
@@ -19,8 +19,7 @@ yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 systemctl start docker
 systemctl enable docker
 usermod -aG docker ec2-user
-
-## Sonarqube
+systemctl restart docker
 sudo sysctl -w vm.max_map_count=262144
 docker pull sonarqube
 docker run -d --name sonarqube-db -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonarqube postgres:alpine
