@@ -97,7 +97,7 @@ resource "aws_route53_record" "jenkins" {
 
 resource "aws_route53_record" "sonar" {
   zone_id = var.zone_id
-  name    = "sonar.${var.zone_name}"
+  name    = "sonarqube.${var.zone_name}"
   type    = "A"
   ttl     = 1
   records = [aws_instance.sonar.public_ip]
