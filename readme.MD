@@ -19,6 +19,8 @@ sudo systemctl enable jenkins
 * AWS Steps
 * SonarQube scanner
 * Pipeline utility steps
+* Rebuilder
+* Ansi colour
 
 #### Master Agent Architecture
 * Create credentials to connect agent
